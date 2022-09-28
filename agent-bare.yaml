@@ -109,8 +109,23 @@ spec:
       name: agent-wal
       namespace: ${NAMESPACE}
     spec:
+      storageClassName: efs-sc
       accessModes:
       - ReadWriteMany
       resources:
         requests:
           storage: 5Gi
+
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: efs-sc
+provisioner: efs.csi.aws.com
+parameters:
+  provisioningMode: efs-ap
+  fileSystemId: fs-0e948d5c9908f0f11
+  directoryPerms: "700"
+  gidRangeStart: "1000" # optional
+  gidRangeEnd: "2000" # optional
+  basePath: "/dynamic_provisioning" # optional
