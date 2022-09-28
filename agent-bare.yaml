@@ -126,9 +126,9 @@ spec:
       - configMap:
           name: grafana-agent
         name: grafana-agent
-#       - name: persistent-storage
-#         persistentVolumeClaim:
-#           claimName: agent-wal  
+      - name: persistent-storage
+        persistentVolumeClaim:
+          claimName: agent-wal  
   updateStrategy:
     type: RollingUpdate
 
