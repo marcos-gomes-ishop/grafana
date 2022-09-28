@@ -126,7 +126,7 @@ spec:
       - configMap:
           name: grafana-agent
         name: grafana-agent
-      - name: persistent-storage
+      - name: agent-wal
         persistentVolumeClaim:
           claimName: agent-wal  
   updateStrategy:
