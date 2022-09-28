@@ -97,25 +97,12 @@ spec:
           name: grafana-agent
       serviceAccountName: grafana-agent
       volumes:
-      - configMap:
-          name: grafana-agent
-        name: grafana-agent
+      - name: persistent-storage
+        persistentVolumeClaim:
+          claimName: efs-claim  
   updateStrategy:
     type: RollingUpdate
-  volumeClaimTemplates:
-  - apiVersion: v1
-    kind: PersistentVolumeClaim
-    metadata:
-      name: agent-wal
-      namespace: ${NAMESPACE}
-    spec:
-      storageClassName: efs-sc
-      accessModes:
-      - ReadWriteMany
-      resources:
-        requests:
-          storage: 5Gi
-
+  
 ---
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
